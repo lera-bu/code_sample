@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Button, ConfigProvider, Divider, Space } from 'antd';
 import CleanerOrdersTabs from '../../components/CleanerOrdersTabs/CleanerOrdersTabs';
 
@@ -9,7 +9,7 @@ import CleanerInfo from '../../components/CleanerInfo/CleanerInfo';
 import CleanerPhoto from '../../components/CleanerPhoto/CleanerPhoto';
 import CleanerFooter from '../../components/CleanerFooter/CleanerFooter';
 
-const Cleaner: React.FC = () => {
+const Cleaner: FC = () => {
   return (
     <>
       <ConfigProvider
