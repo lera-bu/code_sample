@@ -1,23 +1,27 @@
-import React from 'react';
-import { Button, Divider, Row, Space, Typography, ConfigProvider } from 'antd';
-import Accordion from '../../components/LandingCleaner/Accordion';
+import React, { useEffect } from 'react';
+import {
+  Button,
+  Divider,
+  Row,
+  Space,
+  Typography,
+  ConfigProvider,
+} from 'antd';
+import { FormOutlined } from '@ant-design/icons';
+import { Link } from 'react-router-dom';
 import styles from './LandingCleanerStyles.module.css';
 import WeOffer from '../../components/LandingCleaner/WeOffer';
 import BecomeACleaner from '../../components/LandingCleaner/BecomeACleaner';
-import { FormOutlined } from '@ant-design/icons';
 import CleanerRegister from '../../components/CleanerRegister/CleanerRegister';
 import Navbar from '../../components/Navbar/Navbar';
-import { Link } from 'react-router-dom';
+import CleanerFooter from '../../components/CleanerFooter/CleanerFooter';
 
 const { Title } = Typography;
 
-import CleanerFooter from '../../components/CleanerFooter/CleanerFooter';
-import { useEffect } from 'react';
-
-export default function LandingCleaner() {
+export default function LandingCleaner(): JSX.Element {
   useEffect(() => {
     window.scrollTo(0, 0);
-  });
+  }, []);
 
   return (
     <>
@@ -30,7 +34,11 @@ export default function LandingCleaner() {
           },
         }}
       >
-        <Space direction="vertical" size="middle" style={{ display: 'flex' }}>
+        <Space
+          direction="vertical"
+          size="middle"
+          style={{ display: 'flex' }}
+        >
           <div className={styles.cleanerHeaderDiv}>
             <Title level={4}>ИЩЕМ СПЕЦИАЛИСТОВ ПО УБОРКЕ</Title>
             <Title>
@@ -64,8 +72,8 @@ export default function LandingCleaner() {
           <Row>
             <div className={styles.yellowDiv}>
               <Title>
-                Мы настроены на долгосрочное <br /> сотрудничество и гарантируем{' '}
-                <br />
+                Мы настроены на долгосрочное <br /> сотрудничество и
+                гарантируем <br />
                 стабильный поток клиентов
               </Title>
               <Button
@@ -117,7 +125,10 @@ export default function LandingCleaner() {
               <Accordion />
             </div>
           </Row>
-          <div className={styles.cleanerRegistrationDiv} id="cleanerRegForm">
+          <div
+            className={styles.cleanerRegistrationDiv}
+            id="cleanerRegForm"
+          >
             <CleanerRegister />
           </div>
         </Space>
