@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { FC, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-
 import {
   Button,
   Form,
@@ -11,27 +10,30 @@ import {
   ConfigProvider,
   Row,
 } from 'antd';
-
-const { Title } = Typography;
-const { Option } = Select;
 import { LockOutlined } from '@ant-design/icons';
-
 import styles from './LandingCleanerStyles.module.css';
 import { authReducer } from '../../redux/authSlice';
 import CleanerFooter from '../../components/CleanerFooter/CleanerFooter';
-
 import { Link } from 'react-router-dom';
 
-const CleanerLogin = () => {
+const { Title } = Typography;
+const { Option } = Select;
+
+interface ErrStatus {
+  status: boolean;
+  message: string;
+}
+
+const CleanerLogin: FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const [err, setErr] = React.useState({ status: false, message: '' });
+  const [err, setErr] = useState<ErrStatus>({ status: false, message: '' });
 
-  const onFinishStatus = (err, errorInfo: any) => {
-    setErr({ err, message: errorInfo });
+  const onFinishStatus = (err: boolean, errorInfo: string): void => {
+    setErr({ status: err, message: errorInfo });
     setTimeout(() => {
-      setErr({ err: false, message: '' });
+      setErr({ status: false, message: '' });
     }, 3000);
   };
 
@@ -56,7 +58,11 @@ const CleanerLogin = () => {
     </Form.Item>
   );
 
-  const onFinish = async (values: any): Promise<void> => {
+  const onFinish = async (values: {
+    prefix: string;
+    phone: string;
+    password: string;
+  }): Promise<void> => {
     const phoneNumber = values.prefix + values.phone;
 
     const res = await fetch(import.meta.env.VITE_URL + 'cleaner/login', {
@@ -114,9 +120,7 @@ const CleanerLogin = () => {
             {!err.status && (
               <Form.Item validateStatus="error" help={err.message} />
             )}
-            <Title>
-              Авторизация сотрудника
-            </Title>
+            <Title>Авторизация сотрудника</Title>
 
             <Form.Item
               name="phone"
